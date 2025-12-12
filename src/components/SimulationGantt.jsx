@@ -92,7 +92,7 @@ const SimulationGantt = ({ gantt, snapshots }) => {
 
   return (
     <div className="p-4">
-
+<h2 className="text-xl font-semibold mb-4">Gantt Chart</h2>
       {/* Controls */}
       <div className="flex items-center gap-4 mb-4">
         <button onClick={play} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">

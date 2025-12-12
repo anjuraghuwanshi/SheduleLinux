@@ -19,16 +19,34 @@ const ProcessForm = ({ processes, setProcesses, algorithm, setAlgorithm, setResu
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const addProcess = () => {
-    if (!form.pid || !form.arrival || !form.burst) {
-      alert("PID, Arrival time and Burst time are required!");
-      return;
+const addProcess = () => {
+  // Allow p1 or P1 (letter p/P followed by digits)
+  const pidPattern = /^[pP][0-9]+$/;
+
+  if (!pidPattern.test(form.pid)) {
+    alert("PID must be like p1 or P1 (letter p/P followed by a number)");
+    return;
+  }
+
+  if (!form.arrival || !form.burst) {
+    alert("Arrival time and Burst time are required!");
+    return;
+  }
+
+  setProcesses([
+    ...processes,
+    {
+      ...form,
+      pid: form.pid.toLowerCase(), 
+      arrival: +form.arrival,
+      burst: +form.burst,
+      priority: +form.priority
     }
+  ]);
 
-    setProcesses([...processes, { ...form, arrival: +form.arrival, burst: +form.burst, priority: +form.priority}]);
+  setForm({ pid: "", arrival: "", burst: "", priority: "" });
+};
 
-    setForm({ pid: "", arrival: "", burst: "", priority: "" });
-  };
 
   const runAlgorithm = () => {
     if (processes.length === 0) return alert("Add at least 1 process.");
@@ -59,6 +77,19 @@ console.log(result);
 
   return (
     <div>
+      {/* Algorithm Selection */}
+      <h3 className="text-lg font-semibold mt-6">Select Algorithm</h3>
+      <select
+        value={algorithm}
+        onChange={(e) => setAlgorithm(e.target.value)}
+        className="border p-2 rounded w-full mt-2"
+      >
+        <option>FCFS</option>
+        <option>SJF</option>
+        <option>RR</option>
+        <option>PRIORITY</option>
+        <option>MLFQ</option>
+      </select>
       <h2 className="text-xl font-semibold mb-4">Add Process</h2>
 
       <div className="grid grid-cols-2 gap-3">
@@ -104,7 +135,7 @@ console.log(result);
   <input 
     name="quantum"
     type="number"
-    value={form.quantum}
+    value={quantum}
     onChange={(e)=>setQuantum(e.target.value)}
     placeholder="Quantum (only once)"
     className="border p-2 rounded"
@@ -120,19 +151,6 @@ console.log(result);
         Add Process
       </button>
 
-      {/* Algorithm Selection */}
-      <h3 className="text-lg font-semibold mt-6">Select Algorithm</h3>
-      <select
-        value={algorithm}
-        onChange={(e) => setAlgorithm(e.target.value)}
-        className="border p-2 rounded w-full mt-2"
-      >
-        <option>FCFS</option>
-        <option>SJF</option>
-        <option>RR</option>
-        <option>PRIORITY</option>
-        <option>MLFQ</option>
-      </select>
 
       {/* Run Button */}
       <button
