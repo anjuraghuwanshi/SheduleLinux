@@ -5,7 +5,7 @@ import Scheduler from "./pages/Scheduler";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/SheduleLinux">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/scheduler" element={<Scheduler />} />
