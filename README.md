@@ -1,16 +1,231 @@
-# React + Vite
+# ScheduleLinux
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **An Interactive CPU Scheduling Algorithm Simulator built with React + Vite**
 
-Currently, two official plugins are available:
+🔗 **Live Demo:**  
+https://anjuraghuwanshi.github.io/SheduleLinux/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📑 Table of Contents
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [✨ Features](#-features)
+- [🔁 Algorithms Supported](#-algorithms-supported)
+- [🛠 Tech Stack](#-tech-stack)
+- [📂 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+- [▶️ Running Locally](#️-running-locally)
+- [🏗 Build](#-build)
+- [🌍 Deployment (GitHub Pages)](#-deployment-github-pages)
+- [🧭 Routes](#-routes)
+- [ℹ️ About Page](#️-about-page)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 🎯 Interactive CPU scheduling simulation
+- 📊 Gantt chart visualization
+- 🧵 Ready Queue animation
+- ⏱ Step-by-step execution
+- 🎛 Algorithm-based dynamic inputs  
+  *(Quantum & Priority fields appear only when needed)*
+- ⚡ Smooth UI animations
+- 📱 Responsive design for all screens
+- 📘 Beginner-friendly for OS learners
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+## 🔁 Algorithms Supported
+
+- **FCFS** – First Come First Serve  
+- **SJF** – Shortest Job First  
+- **Round Robin (RR)** – Uses Time Quantum  
+- **Priority Scheduling** – Preemptive  
+- **MLFQ** – Multi-Level Feedback Queue  
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+## 🛠 Tech Stack
+
+- **React** (UI)
+- **Vite** (Fast build tool)
+- **Tailwind CSS** (Styling)
+- **React Router DOM** (Routing)
+- **Framer Motion** (Animations)
+- **GitHub Pages** (Deployment)
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+## 📂 Project Structure
+
+```txt
+src/
+├── algorithms/
+│   ├── fcfs.js
+│   ├── sjf.js
+│   ├── rr.js
+│   ├── priority.js
+│   └── mlfq.js
+│
+├── components/
+│   ├── GuideModal.jsx
+│   ├── ProcessForm.jsx
+│   └── SimulationGantt.jsx
+│
+├── pages/
+│   ├── Home.jsx
+│   ├── Scheduler.jsx
+│   └── About.jsx
+│
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+
+
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+* Node.js **v18+**
+* npm or yarn
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+## ▶️ Running Locally
+
+### Clone the repository
+
+```bash
+git clone https://github.com/anjuraghuwanshi/SheduleLinux.git
+cd SheduleLinux
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Start development server
+
+```bash
+npm run dev
+```
+
+### Open in browser
+
+```
+http://localhost:5173
+```
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+## 🏗 Build
+
+### Create production build
+
+```bash
+npm run build
+```
+
+### Preview production build
+
+```bash
+npm run preview
+```
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+## 🌍 Deployment (GitHub Pages)
+
+### Install gh-pages
+
+```bash
+npm install --save-dev gh-pages
+```
+
+### Update `package.json`
+
+```json
+"homepage": "https://anjuraghuwanshi.github.io/SheduleLinux/",
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+}
+```
+
+### Update `vite.config.js`
+
+```js
+export default defineConfig({
+  base: "/SheduleLinux/",
+  plugins: [react(), tailwindcss()],
+});
+```
+
+### Deploy to GitHub Pages
+
+```bash
+npm run deploy
+```
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+## 🧭 Routes
+
+```txt
+/            → Home
+/scheduler   → Scheduling Simulator
+/about       → About Page
+```
+
+⬆️ [Back to Top](#-table-of-contents)
+
+---
+
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch:
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Commit your changes:
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push and open a Pull Request
+
+
+
+<p align="center">⭐ If you like this project, consider giving it a star!</p>
