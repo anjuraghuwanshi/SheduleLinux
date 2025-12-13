@@ -5,48 +5,57 @@ import rr from "../algorithms/rr";
 import priorityAlgo from "../algorithms/priority";
 import mlfq from "../algorithms/mlfq";
 
-const ProcessForm = ({ processes, setProcesses, algorithm, setAlgorithm, setResults }) => {
+const ProcessForm = ({
+  processes,
+  setProcesses,
+  algorithm,
+  setAlgorithm,
+  setResults,
+}) => {
   const [form, setForm] = useState({
     pid: "",
     arrival: "",
     burst: "",
     priority: "",
-
   });
-  const [quantum,setQuantum] = useState("");
+
+  const [quantum, setQuantum] = useState("");
+  const [showAddedMsg, setShowAddedMsg] = useState(false); // ✅ NEW
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-const addProcess = () => {
-  // Allow p1 or P1 (letter p/P followed by digits)
-  const pidPattern = /^[pP][0-9]+$/;
+  const addProcess = () => {
+    const pidPattern = /^[pP][0-9]+$/;
 
-  if (!pidPattern.test(form.pid)) {
-    alert("PID must be like p1 or P1 (letter p/P followed by a number)");
-    return;
-  }
-
-  if (!form.arrival || !form.burst) {
-    alert("Arrival time and Burst time are required!");
-    return;
-  }
-
-  setProcesses([
-    ...processes,
-    {
-      ...form,
-      pid: form.pid.toLowerCase(), 
-      arrival: +form.arrival,
-      burst: +form.burst,
-      priority: +form.priority
+    if (!pidPattern.test(form.pid)) {
+      alert("PID must be like p1 or P1 (letter p/P followed by a number)");
+      return;
     }
-  ]);
 
-  setForm({ pid: "", arrival: "", burst: "", priority: "" });
-};
+    if (!form.arrival || !form.burst) {
+      alert("Arrival time and Burst time are required!");
+      return;
+    }
 
+    setProcesses([
+      ...processes,
+      {
+        ...form,
+        pid: form.pid.toLowerCase(),
+        arrival: +form.arrival,
+        burst: +form.burst,
+        priority: +form.priority,
+      },
+    ]);
+
+    setForm({ pid: "", arrival: "", burst: "", priority: "" });
+
+    // ✅ show success message
+    setShowAddedMsg(true);
+    setTimeout(() => setShowAddedMsg(false), 600);
+  };
 
   const runAlgorithm = () => {
     if (processes.length === 0) return alert("Add at least 1 process.");
@@ -60,7 +69,7 @@ const addProcess = () => {
         result = sjf(processes);
         break;
       case "RR":
-        result = rr(processes, +quantum); // default quantum
+        result = rr(processes, +quantum);
         break;
       case "PRIORITY":
         result = priorityAlgo(processes);
@@ -69,9 +78,9 @@ const addProcess = () => {
         result = mlfq(processes);
         break;
       default:
-        break;
+        return;
     }
-console.log(result);
+
     setResults(result);
   };
 
@@ -90,10 +99,10 @@ console.log(result);
         <option>PRIORITY</option>
         <option>MLFQ</option>
       </select>
-      <h2 className="text-xl font-semibold mb-4">Add Process</h2>
+
+      <h3 className="text-lg font-semibold mt-6">Add Process</h3>
 
       <div className="grid grid-cols-2 gap-3">
-        
         <input
           name="pid"
           value={form.pid}
@@ -131,19 +140,19 @@ console.log(result);
           />
         )}
 
-{algorithm === "RR"  && processes.length == 0 &&(
-  <input 
-    name="quantum"
-    type="number"
-    value={quantum}
-    onChange={(e)=>setQuantum(e.target.value)}
-    placeholder="Quantum (only once)"
-    className="border p-2 rounded"
-  />
-)}
-
+        {algorithm === "RR" && processes.length === 0 && (
+          <input
+            name="quantum"
+            type="number"
+            value={quantum}
+            onChange={(e) => setQuantum(e.target.value)}
+            placeholder="Quantum (only once)"
+            className="border p-2 rounded"
+          />
+        )}
       </div>
 
+      {/* Add Process Button */}
       <button
         onClick={addProcess}
         className="mt-3 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
@@ -151,6 +160,12 @@ console.log(result);
         Add Process
       </button>
 
+      {/* ✅ Success message */}
+      {showAddedMsg && (
+        <div className="mt-2 text-sm text-green-700 bg-green-100 border border-green-300 px-3 py-2 rounded-lg text-center animate-fadeOut">
+          ✅ Process added successfully
+        </div>
+      )}
 
       {/* Run Button */}
       <button
@@ -159,9 +174,9 @@ console.log(result);
       >
         Run Scheduler
       </button>
-
     </div>
   );
 };
 
 export default ProcessForm;
+
