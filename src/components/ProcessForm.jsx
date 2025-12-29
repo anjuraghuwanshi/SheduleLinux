@@ -3,7 +3,9 @@ import fcfs from "../algorithms/fcfs";
 import sjf from "../algorithms/sjf";
 import rr from "../algorithms/rr";
 import priorityAlgo from "../algorithms/priority";
-import mlfq from "../algorithms/mlfq";
+import srjf from "../algorithms/srjf";
+import lrjf from "../algorithms/lrjf";
+import ljf from "../algorithms/ljf";
 
 const ProcessForm = ({
   processes,
@@ -74,8 +76,14 @@ const ProcessForm = ({
       case "PRIORITY":
         result = priorityAlgo(processes);
         break;
-      case "MLFQ":
-        result = mlfq(processes);
+      case "SRJF":
+        result = srjf(processes);
+        break;
+      case "LRJF":
+        result = lrjf(processes);
+        break;
+      case "LJF":
+        result = ljf(processes);
         break;
       default:
         return;
@@ -95,9 +103,11 @@ const ProcessForm = ({
       >
         <option>FCFS</option>
         <option>SJF</option>
+        <option>LJF</option>
         <option>RR</option>
         <option>PRIORITY</option>
-        <option>MLFQ</option>
+        <option>SRJF</option>
+        <option>LRJF</option>
       </select>
 
       <h3 className="text-lg font-semibold mt-6">Add Process</h3>
