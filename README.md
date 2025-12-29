@@ -42,11 +42,14 @@ https://anjuraghuwanshi.github.io/SheduleLinux/
 
 ## 🔁 Algorithms Supported
 
-- **FCFS** – First Come First Serve  
-- **SJF** – Shortest Job First  
-- **Round Robin (RR)** – Uses Time Quantum  
-- **Priority Scheduling** – Preemptive  
-- **MLFQ** – Multi-Level Feedback Queue  
+- **FCFS** – First Come First Serve (Non Preemptive)
+- **SJF** – Shortest Job First (Non Preemptive)
+- **LJF** - Longest Job First (Non Preemptive)
+- **Round Robin (RR)** – Uses Time Quantum (Preemptive)
+- **Priority Scheduling** – Preemptive
+- **SRTF / SRJF** – Shortest Remaining Job First (Preemptive)
+- **LRTF / LRJF** - Longest Remaining Job First (Preemptive)
+ 
 
 ⬆️ [Back to Top](#-table-of-contents)
 
